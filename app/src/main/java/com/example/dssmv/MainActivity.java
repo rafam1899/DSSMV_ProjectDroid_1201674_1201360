@@ -1,5 +1,8 @@
 package com.example.dssmv;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.TextView;
 import androidx.biometric.BiometricPrompt;
 import android.os.Build;
 import android.view.View;
@@ -17,20 +20,34 @@ import java.util.concurrent.Executor;
 public class MainActivity extends AppCompatActivity {
 
     private NumberPicker n1, n2, n3, n4;
-    private Button btnLoginPin, btnLoginBio;
+    private Button btnLoginPin, btnLoginBio, btnLogin, btnSave;
     private Executor executor;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
+    private SharedPreferences sharedPref;
+    private int p1, p2, p3, p4;
+    private TextView textView, textPin;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sharedPref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        p1 = sharedPref.getInt("P1", 0);
+        p2 = sharedPref.getInt("P2", 0);
+        p3 = sharedPref.getInt("P3", 0);
+        p4 = sharedPref.getInt("P4", 0);
+
+        textView = (TextView) findViewById(R.id.textNew);
+        textPin = (TextView) findViewById(R.id.textPin);
+
         btnLoginPin = (Button) findViewById(R.id.btn_pin);
         btnLoginBio = (Button) findViewById(R.id.btn_bio);
+        btnLogin = (Button) findViewById(R.id.btn_login);
+        btnSave = (Button) findViewById(R.id.btn_save);
+
         n1 = (NumberPicker) findViewById(R.id.n1);
         n2 = (NumberPicker) findViewById(R.id.n2);
         n3 = (NumberPicker) findViewById(R.id.n3);
@@ -48,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
         btnLoginPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(p1 == 0) {
+                    textView.setVisibility(View.VISIBLE);
+                    btnSave.setVisibility(View.VISIBLE);
+                } else {
+                    textPin.setVisibility(View.VISIBLE);
+                    btnLogin.setVisibility(View.VISIBLE);
+                }
                 n1.setVisibility(View.VISIBLE);
                 n2.setVisibility(View.VISIBLE);
                 n3.setVisibility(View.VISIBLE);
@@ -95,6 +119,34 @@ public class MainActivity extends AppCompatActivity {
         // if needed by your app.
         btnLoginBio.setOnClickListener(view -> {
             biometricPrompt.authenticate(promptInfo);
+        });
+
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(n1.getValue() == p1 && n2.getValue() == p2 && n3.getValue() == p3 && n4.getValue() == p4) {
+                    Toast.makeText(getApplicationContext(), "Login success",
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Wrong pin",
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("P1", n1.getValue());
+                editor.putInt("P2", n2.getValue());
+                editor.putInt("P3", n3.getValue());
+                editor.putInt("P4", n4.getValue());
+                editor.commit();
+            }
         });
 
     }
