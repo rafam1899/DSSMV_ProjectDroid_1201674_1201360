@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.dssmv"
+        applicationId "com.example.dssmv_projectdroid_1201674_1201360"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
