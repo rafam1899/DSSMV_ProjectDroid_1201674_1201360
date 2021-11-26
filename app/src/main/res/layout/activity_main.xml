@@ -8,53 +8,54 @@
         android:orientation="vertical"
         tools:context=".MainActivity"
         android:padding="20dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="#1F1B3E">
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="WELCOME TO"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            />
     <TextView
             android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:text="ASTEROID NEAR US"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"/>
+            android:layout_height="wrap_content"
+            android:text="ASTEROID FINDER"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#fff"/>
     <Button
             android:id="@+id/btn_pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login with pin"/>
+            android:text="Login with pin"
+            android:backgroundTint="#098"
+            android:textColor="#fff"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="or"
+            android:textColor="#fff">
+    </TextView>
     <Button
             android:id="@+id/btn_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login with biometrics"/>
+            android:text="Login with biometrics"
+            android:textColor="#fff"
+            android:backgroundTint="#098"/>
     <TextView
             android:id="@+id/textNew"
             android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:text="Insert Pin and remember for next time"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"/>
-    <TextView
-            android:id="@+id/textPin"
-            android:visibility="invisible"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:text="Insert Pin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="#fff"/>
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,34 +64,34 @@
                 android:id="@+id/n1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:theme="@style/NumberPickerTheme"/>
         <NumberPicker
                 android:id="@+id/n2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:theme="@style/NumberPickerTheme"/>
         <NumberPicker
                 android:id="@+id/n3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:theme="@style/NumberPickerTheme"/>
         <NumberPicker
                 android:id="@+id/n4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:theme="@style/NumberPickerTheme"/>
     </LinearLayout>
     <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:visibility="invisible"/>
-    <Button
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save and Login"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:textColor="#fff"
+            android:backgroundTint="#098"/>
 
 </LinearLayout>
