@@ -12,19 +12,23 @@ public class JsonHandler {
         AsteroidDateDTO date = new AsteroidDateDTO();
         try {
             JSONObject mResponseObject = new JSONObject(resp);
-            String cod = mResponseObject.getString("cod");
-            if(cod.contains("200")) {
-                date.setDate(mResponseObject.getJSONObject("Date").getString("name") + " - " + mResponseObject.getJSONObject("Date").getString("country"));
-                JSONArray array = mResponseObject.getJSONArray("list");
-                for (int i = 0; i < array.length(); i++) {
-                    AsteroidInfoDTO day = new AsteroidInfoDTO();
-                    JSONObject obj1 = array.getJSONObject(i);
-                    day.setName(obj1.getString("dt_txt"));
-                    day.setDiameter((int) obj1.getJSONObject("main").getDouble("diameter"));
-                    //day.setHazardous((boolean) obj1.getJSONObject("main").getDouble("Potentially Hazardous"));
-                    JSONArray array2 = obj1.getJSONArray("asteroid");
-                    date.addAsteroid(day);
+            String cod = mResponseObject.getString("element_count");
+
+            if(!cod.isEmpty()) {
+
+                JSONObject object = mResponseObject.getJSONObject("near_earth_objects");
+                JSONArray array2 = object.getJSONArray(date.getDate());
+
+                for (int i = 0; i < array2.length(); i++) {
+                    AsteroidInfoDTO asteroid = new AsteroidInfoDTO();
+                    JSONObject obj1 = array2.getJSONObject(i);
+                    asteroid.setName(obj1.getString("name"));
+                    asteroid.setDiameter(obj1.getJSONObject("estimated_diameter").getJSONObject("kilometers").getDouble("estimated_diameter_max"));
+                    asteroid.setHazardous(obj1.getBoolean("is_potentially_hazardous_asteroid"));
+                    //JSONArray array3 = obj1.getJSONArray("asteroid");
+                    date.addAsteroid(asteroid);
                 }
+
                 return date;
             }
             else{

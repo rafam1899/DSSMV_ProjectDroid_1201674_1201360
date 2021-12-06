@@ -53,14 +53,14 @@ public class ListViewAdapterAsteroidInfo extends BaseAdapter {
             itemView = convertView;
         }
 
-        TextView asteroid_name = (TextView) itemView.findViewById(R.id.weather_date);
-        asteroid_name.setText(asteroid.getName());
+        TextView name = (TextView) itemView.findViewById(R.id.name);
+        name.setText(String.valueOf("Name: " + asteroid.getName()));
 
-        TextView diameter = (TextView) itemView.findViewById(R.id.weather_min);
-        diameter.setText(String.valueOf(asteroid.getDiameter()));
+        TextView diameter = (TextView) itemView.findViewById(R.id.diameter);
+        diameter.setText("Diameter: " + asteroid.getDiameter() + " KM");
 
-        TextView hazardous = (TextView) itemView.findViewById(R.id.weather_max);
-        hazardous.setText(String.valueOf(asteroid.getHazardous()));
+        TextView hazardous = (TextView) itemView.findViewById(R.id.hazardous);
+        hazardous.setText("Is Hazardous: " + asteroid.getHazardous());
 
         /*ImageView imageView = (ImageView) itemView.findViewById(R.id.thumbImage);
         imageView.setImageBitmap(asteroid.getIcon());*/
