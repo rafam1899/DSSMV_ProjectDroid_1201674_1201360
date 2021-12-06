@@ -25,6 +25,7 @@ public class JsonHandler {
                     asteroid.setName(obj1.getString("name"));
                     asteroid.setDiameter(obj1.getJSONObject("estimated_diameter").getJSONObject("kilometers").getDouble("estimated_diameter_max"));
                     asteroid.setHazardous(obj1.getBoolean("is_potentially_hazardous_asteroid"));
+                    asteroid.setLink(obj1.getJSONObject("links").getString("self"));
                     //JSONArray array3 = obj1.getJSONArray("asteroid");
                     date.addAsteroid(asteroid);
                 }

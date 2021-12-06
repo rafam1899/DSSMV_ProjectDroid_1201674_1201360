@@ -5,6 +5,7 @@ public class AsteroidInfoDTO {
     private String name;
     private double diameter;
     private boolean hazardous;
+    private String link;
 
     public AsteroidInfoDTO() {
 
@@ -24,6 +25,14 @@ public class AsteroidInfoDTO {
 
     public void setHazardous(boolean hazardous) {
         this.hazardous = hazardous;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getName() {

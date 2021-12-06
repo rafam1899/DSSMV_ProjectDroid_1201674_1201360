@@ -18,13 +18,17 @@ android:background="#1F1B3E">
         android:textSize="20dp"
         android:textColor="#fff"/>
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="15dp"
-                android:textColor="#fff"
-                android:id="@+id/nAsteroids"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:textColor="#fff"
+            android:id="@+id/nAsteroids"/>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/qrcode"/>
 
 
     <ListView
