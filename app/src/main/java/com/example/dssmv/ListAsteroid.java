@@ -50,7 +50,23 @@ public class ListAsteroid extends AppCompatActivity {
 
         getAsteroidsInfo(Utils.URL_SERVICE_PREFIX + formatedDate + Utils.URL_SERVICE_MIDDLE + formatedDate + Utils.URL_SERVICE_SUFFIX);
 
-        registerForContextMenu(asteroid_list);
+
+        asteroid_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(ListAsteroid.this,AsteroidActivity.class);
+                intent.putExtra("name", asteroidDate.getAsteroids().get(i).getName());
+                intent.putExtra("diameter",asteroidDate.getAsteroids().get(i).getDiameter());
+                intent.putExtra("hazardous", asteroidDate.getAsteroids().get(i).getHazardous());
+                intent.putExtra("velocity", asteroidDate.getAsteroids().get(i).getVelocity());
+                intent.putExtra("distance", asteroidDate.getAsteroids().get(i).getDistance());
+                startActivity(intent);
+
+
+            }
+        });
+
+        //registerForContextMenu(asteroid_list);
     }
 
     private void getAsteroidsInfo(String urlStr){
@@ -97,7 +113,7 @@ public class ListAsteroid extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater menuInflater = (MenuInflater) getMenuInflater();
@@ -178,5 +194,5 @@ public class ListAsteroid extends AppCompatActivity {
             return null;
         }
         return bitmap;
-    }
+    }*/
 }

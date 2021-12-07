@@ -9,7 +9,7 @@ import java.util.List;
 public class Mapper {
     public static AsteroidInfo asteroidInfoDTO2AsteroidInfo(AsteroidInfoDTO AsteroidInfoDTO) throws NullPointerException {
         AsteroidInfo asteroid = null;
-        asteroid = new AsteroidInfo(AsteroidInfoDTO.getName(), AsteroidInfoDTO.getDiameter(), AsteroidInfoDTO.isHazardous(), AsteroidInfoDTO.getLink());
+        asteroid = new AsteroidInfo(AsteroidInfoDTO.getName(), AsteroidInfoDTO.getDiameter(), AsteroidInfoDTO.isHazardous(), AsteroidInfoDTO.getLink(), AsteroidInfoDTO.getVelocity(), AsteroidInfoDTO.getDistance());
         return asteroid;
     }
 

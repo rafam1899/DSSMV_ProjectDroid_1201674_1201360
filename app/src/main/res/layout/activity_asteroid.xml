@@ -78,6 +78,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/distance"
                     android:paddingLeft="20dp"/>
         </LinearLayout>
         <LinearLayout
@@ -92,6 +93,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/velocity"
                     android:paddingLeft="20dp"/>
         </LinearLayout>
     </LinearLayout>

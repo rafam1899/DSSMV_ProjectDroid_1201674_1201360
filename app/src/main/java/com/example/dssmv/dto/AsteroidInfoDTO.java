@@ -6,6 +6,24 @@ public class AsteroidInfoDTO {
     private double diameter;
     private boolean hazardous;
     private String link;
+    private double velocity;
+    private double distance;
+
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 
     public AsteroidInfoDTO() {
 

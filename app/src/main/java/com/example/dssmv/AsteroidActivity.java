@@ -34,12 +34,16 @@ public class AsteroidActivity extends AppCompatActivity {
         TextView name = (TextView) findViewById(R.id.name);
         TextView hazardous = (TextView) findViewById(R.id.hazardous);
         TextView diameter = (TextView) findViewById(R.id.diameter);
+        TextView velocity = (TextView) findViewById(R.id.velocity);
+        TextView distance = (TextView) findViewById(R.id.distance);
 
         Button button = (Button) findViewById(R.id.share);
 
         name.setText(intent.getStringExtra("name"));
         diameter.setText("Estimated diameter: " + intent.getDoubleExtra("diameter",0.0) + " KM");
-        hazardous.setText("Is dangerous : " + intent.getBooleanExtra("Hazardous",false));
+        hazardous.setText("Is dangerous : " + intent.getBooleanExtra("hazardous",false));
+        velocity.setText("Velocity : " + intent.getDoubleExtra("velocity",0.0) + " KM/H");
+        distance.setText("Distance to earth : " + intent.getDoubleExtra("distance",0.0) + " KM");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
