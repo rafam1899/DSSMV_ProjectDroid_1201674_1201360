@@ -3,12 +3,13 @@
           package="com.example.dssmv">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="Android.permission.CAMERA" />
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/asteroid"
             android:label="Asteroid Finder"
-            android:roundIcon="@mipmap/ic_launcher_round"
+            android:roundIcon="@mipmap/asteroid"
             android:supportsRtl="true"
             android:theme="@style/Theme.DSSMV">
         <activity android:name=".MainActivity">
@@ -19,6 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListAsteroid">
+
+        </activity>
+        <activity android:name=".AsteroidActivity">
 
         </activity>
     </application>

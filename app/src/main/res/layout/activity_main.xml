@@ -56,35 +56,14 @@
             android:text="Insert Pin and remember for next time"
             android:gravity="center"
             android:textColor="#fff"/>
-    <LinearLayout
-            android:layout_width="wrap_content"
+    <EditText
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <NumberPicker
-                android:id="@+id/n1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:theme="@style/NumberPickerTheme"/>
-        <NumberPicker
-                android:id="@+id/n2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:theme="@style/NumberPickerTheme"/>
-        <NumberPicker
-                android:id="@+id/n3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:theme="@style/NumberPickerTheme"/>
-        <NumberPicker
-                android:id="@+id/n4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:theme="@style/NumberPickerTheme"/>
-    </LinearLayout>
+            android:visibility="invisible"
+            android:letterSpacing="0.2"
+            android:gravity="center"
+            android:maxLength="4"
+            android:id="@+id/pin"/>
     <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"

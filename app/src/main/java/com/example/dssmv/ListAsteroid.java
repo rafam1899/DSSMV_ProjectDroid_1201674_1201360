@@ -1,9 +1,9 @@
 package com.example.dssmv;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -18,12 +18,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ListAsteroid extends AppCompatActivity {
 
@@ -42,13 +38,17 @@ public class ListAsteroid extends AppCompatActivity {
 
         asteroid_list = (ListView) findViewById(R.id.weather_list);
         nAsteroid = (TextView) findViewById(R.id.nAsteroids);
-        qrcodeImage = (ImageView) findViewById(R.id.qrcode);
+
 
         asteroidDate = new AsteroidDate();
         adapter = new ListViewAdapterAsteroidInfo(getApplicationContext(),R.layout.list_asteroid,asteroidDate.getAsteroids());
         asteroid_list.setAdapter(adapter);
 
-        getAsteroidsInfo(Utils.URL_SERVICE_PREFIX + "2021-12-06" + Utils.URL_SERVICE_MIDDLE + "2021-12-06" + Utils.URL_SERVICE_SUFFIX);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date data = new Date();
+        String formatedDate = dateFormat.format(data);
+
+        getAsteroidsInfo(Utils.URL_SERVICE_PREFIX + formatedDate + Utils.URL_SERVICE_MIDDLE + formatedDate + Utils.URL_SERVICE_SUFFIX);
 
         registerForContextMenu(asteroid_list);
     }
@@ -89,8 +89,8 @@ public class ListAsteroid extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.qrcode:
-                Toast.makeText(getApplicationContext(),
-                        "QRCODE ", Toast.LENGTH_LONG).show();
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -111,15 +111,19 @@ public class ListAsteroid extends AppCompatActivity {
         long id = info.id;
         AsteroidInfo str = asteroidDate.getAsteroids().get(pos);
         switch (item.getItemId()) {
-            case R.id.partilhar:
+            case R.id.share:
 
-                AlertDialog alertDialog = new AlertDialog.Builder(ListAsteroid.this).create();
-                alertDialog.setTitle("QRCode Generated");
-                alertDialog.setIcon(R.drawable.asteroid);
+                final Dialog dialog = new Dialog(this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+                View layout = inflater.inflate(R.layout.qrcode_layout,null);
+                qrcodeImage = (ImageView) layout.findViewById(R.id.qrcodeimg);
+                Button btn = (Button) layout.findViewById(R.id.btn_dismiss);
 
                 Bitmap bm = null;
                 try {
-                    bm = encodeAsBitmap(str.getLink(), BarcodeFormat.QR_CODE, 250, 250);
+                    bm = encodeAsBitmap(str.getLink(), BarcodeFormat.QR_CODE, 500, 500);
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }
@@ -128,14 +132,24 @@ public class ListAsteroid extends AppCompatActivity {
                     qrcodeImage.setImageBitmap(bm);
                 }
 
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                qrcodeImage.requestLayout();
+                dialog.setContentView(layout);
+                dialog.show();
 
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
                     }
                 });
-                alertDialog.show();
 
                 return true;
+            case R.id.view:
+                Intent intent = new Intent(ListAsteroid.this,AsteroidActivity.class);
+                intent.putExtra("name", str.getName());
+                intent.putExtra("diameter",str.getDiameter());
+                intent.putExtra("hazardous", str.getHazardous());
+                startActivity(intent);
             default:
                 return super.onContextItemSelected(item);
         }
