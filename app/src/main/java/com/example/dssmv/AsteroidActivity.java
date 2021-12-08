@@ -58,7 +58,11 @@ public class AsteroidActivity extends AppCompatActivity {
 
                 Bitmap bm = null;
                 try {
-                    bm = encodeAsBitmap("Name: " + intent.getStringExtra("name"), BarcodeFormat.QR_CODE, 500, 500);
+                    bm = encodeAsBitmap("Name: " + intent.getStringExtra("name")+"\n" +
+                            "Estimated diameter: " + intent.getDoubleExtra("diameter",0.0) + " KM\n"+
+                            "Is dangerous : " + intent.getBooleanExtra("hazardous",false)+"\n"+
+                                    "Velocity : " + intent.getDoubleExtra("velocity",0.0) + " KM/H\n"+
+                            "Distance to earth : " + intent.getDoubleExtra("distance",0.0) + " KM", BarcodeFormat.QR_CODE, 500, 500);
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }

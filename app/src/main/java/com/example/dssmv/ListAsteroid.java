@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ public class ListAsteroid extends AppCompatActivity {
     ImageView qrcodeImage;
     public static int white = 0xFFFFFFFF;
     public static int black = 0xFF000000;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,10 +131,17 @@ public class ListAsteroid extends AppCompatActivity {
             if (intentResult.getContents() == null) {
                 Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
             } else {
-                // if the intentResult is not null we'll set
-                // the content and format of scan message
-                //messageText.setText(intentResult.getContents());
-                //messageFormat.setText(intentResult.getFormatName());
+                String contents = data.getStringExtra("SCAN_RESULT");
+                String[] tokens = contents.split("\n");
+                Log.d(TAG, "onActivityResult: "+ tokens.length);
+
+                Intent intent = new Intent(ListAsteroid.this,AsteroidActivity.class);
+                intent.putExtra("name", tokens[0]);
+                intent.putExtra("diameter",tokens[1]);
+                intent.putExtra("hazardous", tokens[2]);
+                intent.putExtra("velocity", tokens[3]);
+                intent.putExtra("distance", tokens[4]);
+                startActivity(intent);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
