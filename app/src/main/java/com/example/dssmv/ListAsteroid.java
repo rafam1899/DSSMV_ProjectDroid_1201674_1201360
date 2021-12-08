@@ -66,6 +66,7 @@ public class ListAsteroid extends AppCompatActivity {
                 intent.putExtra("hazardous", asteroidDate.getAsteroids().get(i).getHazardous());
                 intent.putExtra("velocity", asteroidDate.getAsteroids().get(i).getVelocity());
                 intent.putExtra("distance", asteroidDate.getAsteroids().get(i).getDistance());
+                intent.putExtra("origem", "App");
                 startActivity(intent);
 
 
@@ -133,14 +134,19 @@ public class ListAsteroid extends AppCompatActivity {
             } else {
                 String contents = data.getStringExtra("SCAN_RESULT");
                 String[] tokens = contents.split("\n");
-                Log.d(TAG, "onActivityResult: "+ tokens.length);
+                String name = tokens[0].substring(5);
+                String diameter = tokens[1].substring(19);
+                String hazardous = tokens[2].substring(14);
+                String velocity = tokens[3].substring(10);
+                String distance = tokens[4].substring(19);
 
                 Intent intent = new Intent(ListAsteroid.this,AsteroidActivity.class);
-                intent.putExtra("name", tokens[0]);
-                intent.putExtra("diameter",tokens[1]);
-                intent.putExtra("hazardous", tokens[2]);
-                intent.putExtra("velocity", tokens[3]);
-                intent.putExtra("distance", tokens[4]);
+                intent.putExtra("name", name);
+                intent.putExtra("diameter",diameter);
+                intent.putExtra("hazardous", hazardous);
+                intent.putExtra("velocity", velocity);
+                intent.putExtra("distance", distance);
+                intent.putExtra("origem", "QRCode");
                 startActivity(intent);
             }
         } else {

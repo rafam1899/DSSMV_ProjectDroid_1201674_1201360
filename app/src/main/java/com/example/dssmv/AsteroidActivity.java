@@ -39,11 +39,21 @@ public class AsteroidActivity extends AppCompatActivity {
 
         Button button = (Button) findViewById(R.id.share);
 
-        name.setText(intent.getStringExtra("name"));
-        diameter.setText("Estimated diameter: " + intent.getDoubleExtra("diameter",0.0) + " KM");
-        hazardous.setText("Is dangerous : " + intent.getBooleanExtra("hazardous",false));
-        velocity.setText("Velocity : " + intent.getDoubleExtra("velocity",0.0) + " KM/H");
-        distance.setText("Distance to earth : " + intent.getDoubleExtra("distance",0.0) + " KM");
+        if (intent.getStringExtra("origem").equals("QRCode")) {
+
+            name.setText(intent.getStringExtra("name"));
+            diameter.setText("Estimated diameter: " + intent.getStringExtra("diameter"));
+            hazardous.setText("Is dangerous : " + intent.getStringExtra("hazardous"));
+            velocity.setText("Velocity : " + intent.getStringExtra("velocity"));
+            distance.setText("Distance to earth : " + intent.getStringExtra("distance"));
+        }
+        else {
+            name.setText(intent.getStringExtra("name"));
+            diameter.setText("Estimated diameter: " + intent.getDoubleExtra("diameter", 0.0) + " KM");
+            hazardous.setText("Is dangerous : " + intent.getBooleanExtra("hazardous", false));
+            velocity.setText("Velocity : " + intent.getDoubleExtra("velocity", 0.0) + " KM/H");
+            distance.setText("Distance to earth : " + intent.getDoubleExtra("distance", 0.0) + " KM");
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
