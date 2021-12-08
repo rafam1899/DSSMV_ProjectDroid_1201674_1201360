@@ -114,7 +114,9 @@ public class ListAsteroid extends AppCompatActivity {
             case R.id.qrcode:
                 IntentIntegrator intentIntegrator = new IntentIntegrator(this);
                 intentIntegrator.setPrompt("Scan a QR Code");
-                intentIntegrator.setOrientationLocked(true);
+                intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.QR_CODE_TYPES);
+                intentIntegrator.setBeepEnabled(false);
+                intentIntegrator.setOrientationLocked(false);
                 intentIntegrator.initiateScan();
 
                 return true;
