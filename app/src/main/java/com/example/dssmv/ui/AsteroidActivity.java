@@ -1,4 +1,4 @@
-package com.example.dssmv;
+package com.example.dssmv.ui;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.dssmv.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;

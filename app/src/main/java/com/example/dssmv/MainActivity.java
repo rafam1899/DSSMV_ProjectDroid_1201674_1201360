@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import com.example.dssmv.ui.ListAsteroid;
 
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 textView.setVisibility(View.INVISIBLE);
                 pin.setVisibility(View.INVISIBLE);
                 btnLogin.setVisibility(View.INVISIBLE);
-                Intent intent = new Intent(MainActivity.this,ListAsteroid.class);
+                Intent intent = new Intent(MainActivity.this, ListAsteroid.class);
                 startActivity(intent);
             }
 

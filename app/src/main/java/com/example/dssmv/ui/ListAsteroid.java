@@ -1,25 +1,16 @@
-package com.example.dssmv;
+package com.example.dssmv.ui;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.dssmv.R;
 import com.example.dssmv.adapter.ListViewAdapterAsteroidInfo;
 import com.example.dssmv.helper.Utils;
 import com.example.dssmv.model.AsteroidDate;
-import com.example.dssmv.model.AsteroidInfo;
 import com.example.dssmv.service.RequestService;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 

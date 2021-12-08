@@ -26,10 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ListAsteroid">
+        <activity android:name=".ui.ListAsteroid">
 
         </activity>
-        <activity android:name=".AsteroidActivity">
+        <activity android:name=".ui.AsteroidActivity">
 
         </activity>
     </application>
