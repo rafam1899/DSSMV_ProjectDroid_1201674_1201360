@@ -13,7 +13,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/asteroid" />
+                android:background="@drawable/asteroid2" />
 
         <TextView
                 android:id="@+id/name"

@@ -26,7 +26,8 @@ import java.util.concurrent.Executor;
 public class MainActivity extends AppCompatActivity {
 
     private EditText pin;
-    private Button btnLoginPin, btnLoginBio, btnLogin;
+    private Button btnLoginPin, btnLogin;
+    private ImageButton btnLoginBio;
     private Executor executor;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textNew);
 
         btnLoginPin = (Button) findViewById(R.id.btn_pin);
-        btnLoginBio = (Button) findViewById(R.id.btn_bio);
+        btnLoginBio = (ImageButton) findViewById(R.id.btn_bio);
         btnLogin = (Button) findViewById(R.id.btn_login);
 
         pin = (EditText) findViewById(R.id.pin);

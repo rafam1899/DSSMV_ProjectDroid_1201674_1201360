@@ -11,14 +11,14 @@
             android:layout_height="wrap_content">
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="250dp"
                 android:orientation="vertical">
             <ImageView
                     android:layout_marginTop="45dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:src="@drawable/asteroid"/>
+                    android:src="@drawable/asteroid2"/>
             <TextView
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center_horizontal"
@@ -105,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/share"
-            android:text="Share"/>
+            android:text="Share"
+            android:backgroundTint="#098"/>
 
 </LinearLayout>
