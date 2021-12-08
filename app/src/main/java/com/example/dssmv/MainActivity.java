@@ -1,9 +1,15 @@
 package com.example.dssmv;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.util.Log;
 import android.widget.*;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.biometric.BiometricPrompt;
 import android.os.Build;
 import android.view.View;
@@ -11,8 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.util.Map;
 import java.util.concurrent.Executor;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,12 +33,52 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private String sharedPin;
     private TextView textView;
+    private static final String TAG = "MainActivity";
+
+    final String[] permissions = {
+            Manifest.permission.CAMERA
+    };
+    ActivityResultLauncher<String[]> launcher = (ActivityResultLauncher<String[]>) registerForActivityResult(
+            new ActivityResultContracts.RequestMultiplePermissions(),
+            new ActivityResultCallback<Map<String, Boolean>>() {
+                @Override
+                public void onActivityResult(Map<String, Boolean> result) {
+                    boolean allGranted = true;
+                    for( Map.Entry<String,Boolean> entry : result.entrySet()){
+                        Log.i( TAG,"Key = " + entry.getKey() +", Value = " + entry.getValue());
+                        if(entry.getValue() == false){
+                            allGranted = false;
+                        }
+                    }
+                    if( ! allGranted ){
+                        Toast.makeText( MainActivity.this, "Some permission is missing", Toast.LENGTH_SHORT ).show();
+                        finish();
+                    }
+                }
+            });
+
+
+    private boolean hasPermissions() {
+        for (String permission : permissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                Log.i(TAG, "Permission is denied: " + permission);
+                return false;
+            }
+            Log.i(TAG, "Permission already granted: " + permission);
+        }
+        return true;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(!hasPermissions()){
+            launcher.launch(permissions);
+        }
+
 
         sharedPref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         sharedPin = sharedPref.getString("PIN", "");
