@@ -4,9 +4,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.dssmv.adapter.ListViewAdapterAsteroidInfo;
 import com.example.dssmv.helper.Utils;
@@ -17,6 +19,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -105,94 +109,33 @@ public class ListAsteroid extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.qrcode:
-
+                IntentIntegrator intentIntegrator = new IntentIntegrator(this);
+                intentIntegrator.setPrompt("Scan a QR Code");
+                intentIntegrator.setOrientationLocked(true);
+                intentIntegrator.initiateScan();
 
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    /*@Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater menuInflater = (MenuInflater) getMenuInflater();
-        menuInflater.inflate(R.menu.context_menu,menu);
-    }
-
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int pos = info.position;
-        long id = info.id;
-        AsteroidInfo str = asteroidDate.getAsteroids().get(pos);
-        switch (item.getItemId()) {
-            case R.id.share:
-
-                final Dialog dialog = new Dialog(this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                View layout = inflater.inflate(R.layout.qrcode_layout,null);
-                qrcodeImage = (ImageView) layout.findViewById(R.id.qrcodeimg);
-                Button btn = (Button) layout.findViewById(R.id.btn_dismiss);
-
-                Bitmap bm = null;
-                try {
-                    bm = encodeAsBitmap(str.getLink(), BarcodeFormat.QR_CODE, 500, 500);
-                } catch (WriterException e) {
-                    e.printStackTrace();
-                }
-
-                if(bm != null) {
-                    qrcodeImage.setImageBitmap(bm);
-                }
-
-                qrcodeImage.requestLayout();
-                dialog.setContentView(layout);
-                dialog.show();
-
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
-                return true;
-            case R.id.view:
-                Intent intent = new Intent(ListAsteroid.this,AsteroidActivity.class);
-                intent.putExtra("name", str.getName());
-                intent.putExtra("diameter",str.getDiameter());
-                intent.putExtra("hazardous", str.getHazardous());
-                startActivity(intent);
-            default:
-                return super.onContextItemSelected(item);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        // if the intentResult is null then
+        // toast a message as "cancelled"
+        if (intentResult != null) {
+            if (intentResult.getContents() == null) {
+                Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+            } else {
+                // if the intentResult is not null we'll set
+                // the content and format of scan message
+                //messageText.setText(intentResult.getContents());
+                //messageFormat.setText(intentResult.getFormatName());
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-    Bitmap encodeAsBitmap(String str, BarcodeFormat barcodeFormat, int width, int heigth) throws WriterException {
-        BitMatrix result;
-        Bitmap bitmap=null;
-        try
-        {
-            result = new MultiFormatWriter().encode(str, barcodeFormat, width, heigth, null);
-
-            int w = result.getWidth();
-            int h = result.getHeight();
-            int[] pixels = new int[w * h];
-            for (int y = 0; y < h; y++) {
-                int offset = y * w;
-                for (int x = 0; x < w; x++) {
-                    pixels[offset + x] = result.get(x, y) ? black:white;
-                }
-            }
-            bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-            bitmap.setPixels(pixels, 0, width, 0, 0, w, h);
-        } catch (Exception iae) {
-            iae.printStackTrace();
-            return null;
-        }
-        return bitmap;
-    }*/
 }
